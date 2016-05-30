@@ -1,0 +1,47 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_feedback_stats', {'projectId': project.publicId } ) }}">Stats of Feedback</a></li>
+        <li class="active">For Field: {{  feedbackFieldDefinition.title }}</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                From <input type="text" name="from" value="{{  dateRange.from|date('c') }}">
+                To <input type="text" name="to" value="{{  dateRange.to|date('c') }}">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Count</th>
+                <th>{{ feedbackCount }}</th>
+            </tr>
+            <tr>
+                <th>Count With This Field</th>
+                <th>{%  if feedbackCountWithField is null %}n/a{%  else %}{{ feedbackCountWithField }}{%  endif %}</th>
+            </tr>
+            {% for moreFieldStatLink in moreFieldStatLinks %}
+                <tr>
+                    <th>{{  moreFieldStatLink.label }}</th>
+                    <th><a href="{{ moreFieldStatLink.url }}?from={{  dateRange.from|date('c')|url_encode}}&to={{  dateRange.to|date('c')|url_encode }}" class="btn btn-default">View</a></th>
+                </tr>
+            {%  endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

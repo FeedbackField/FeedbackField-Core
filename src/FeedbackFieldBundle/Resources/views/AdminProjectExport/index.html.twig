@@ -1,0 +1,44 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+        <li class="active">Export: {{ export.publicId }}</li>
+    </ol>
+
+
+    {%  if  onlyIfFeedbackFields %}
+        <p>Only Export if Fields ...</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Public Id</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for onlyIfFeedbackField in onlyIfFeedbackFields %}
+                <tr>
+                    <td>{{ onlyIfFeedbackField.feedbackFieldDefinition.publicId }}</td>
+                    <td>{{ onlyIfFeedbackField.feedbackFieldDefinition.title }}</td>
+                    <td>
+                        {{  feedbackFieldTypes[onlyIfFeedbackField.feedbackFieldDefinition.type].title }}
+                    </td>
+                    <td></td>
+                </tr>
+            {%  endfor %}
+            </tbody>
+
+        </table>
+    {%  endif %}
+
+{% endblock %}

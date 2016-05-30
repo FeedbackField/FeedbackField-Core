@@ -1,0 +1,32 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+  <ol class="breadcrumb">
+    <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+    <li class="active">Project: {{ project.title }}</li>
+  </ol>
+
+  <p>project Title: {{ project.title }}</p>
+
+  <p>Public ID: {{ project.publicId }}</p>
+
+  <p>Is Active: {% if project.active %}Yes{% else %}No{% endif %}</p>
+
+  <p>Owner: {{ project.owner.username }}</p>
+
+  <ul class="list-group">
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_feedback_list', { 'projectId':project.publicId }) }}" class="btn btn-default">List Feedback</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_feedback_stats', { 'projectId':project.publicId }) }}" class="btn btn-default">Stats of Feedback</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_feedback_field_definition_list', { 'projectId':project.publicId }) }}" class="btn btn-default">List Fields</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_export_list', { 'projectId':project.publicId }) }}" class="btn btn-default">List Exports</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_new_feedback_field_definition', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Field</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_new_export_trello', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Export - Trello</a></li>
+  </ul>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+# @license 3-clause BSD
+# @link https://github.com/FeedbackField/FeedbackField-Core
+
+feedbackfield_home:
+    pattern:  /
+    defaults: { _controller: FeedbackFieldBundle:Index:index }
+    methods:  [GET]
+
+##################################################################### API1
+
+feedbackfield_api1_project_submit:
+    pattern:  /api1/project/{projectId}/submit
+    defaults: { _controller: FeedbackFieldBundle:API1Project:index }
+    methods:  [GET]
+
+
+##################################################################### Admin
+
+feedbackfield_admin_home:
+    pattern:  /admin
+    defaults: { _controller: FeedbackFieldBundle:Admin:index }
+    methods:  [GET]
+
+feedbackfield_admin_project_list:
+    pattern:  /admin/project
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectList:index }
+    methods:  [GET]
+
+feedbackfield_admin_project_new:
+    pattern:  /admin/newProject
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectNew:index }
+    methods:  [GET,POST]
+
+
+
+##################################################################### Admin Project
+
+feedbackfield_admin_project_show:
+    pattern:  /admin/project/{projectId}
+    defaults: { _controller: FeedbackFieldBundle:AdminProject:index }
+    methods:  [GET]
+
+
+
+
+
+##################################################################### Admin Project Feedbacks
+
+feedbackfield_admin_project_feedback_list:
+    pattern:  /admin/project/{projectId}/feedback
+    defaults: { _controller: FeedbackFieldBundle:AdminProject:listFeedback }
+    methods:  [GET]
+
+feedbackfield_admin_project_feedback_stats:
+    pattern:  /admin/project/{projectId}/feedbackstats
+    defaults: { _controller: FeedbackFieldBundle:AdminProject:statsFeedback }
+    methods:  [GET]
+
+
+feedbackfield_admin_project_feedback_field_stats:
+    pattern:  /admin/project/{projectId}/feedbackstats/field/{fieldDefinitionId}
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectStatsFeedbackField:index }
+    methods:  [GET]
+
+feedbackfield_admin_project_feedback_show:
+    pattern:  /admin/project/{projectId}/feedback/{feedbackId}
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectFeedback:index }
+    methods:  [GET]
+
+
+##################################################################### Admin Project Feedback Fields
+
+feedbackfield_admin_project_new_feedback_field_definition:
+    pattern:  /admin/project/{projectId}/newfeedbackfielddefinition
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectEdit:newFeedbackFieldDefinition }
+    methods:  [GET, POST]
+
+feedbackfield_admin_project_feedback_field_definition_list:
+    pattern:  /admin/project/{projectId}/feedbackfielddefinition
+    defaults: { _controller: FeedbackFieldBundle:AdminProject:listFieldDefinitions }
+    methods:  [GET]
+
+feedbackfield_admin_project_feedback_field_definition_show:
+    pattern:  /admin/project/{projectId}/feedbackfielddefinition/{fieldDefinitionId}
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectFeedbackFieldDefinition:index }
+    methods:  [GET]
+
+
+##################################################################### Admin Project Exports
+
+feedbackfield_admin_project_new_export_trello:
+    pattern:  /admin/project/{projectId}/newExportTrello
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectEdit:newExportTrello }
+    methods:  [GET, POST]
+
+
+feedbackfield_admin_project_export_show:
+    pattern:  /admin/project/{projectId}/export/{exportId}
+    defaults: { _controller: FeedbackFieldBundle:AdminProjectExport:index }
+    methods:  [GET]
+
+
+feedbackfield_admin_project_export_list:
+    pattern:  /admin/project/{projectId}/export
+    defaults: { _controller: FeedbackFieldBundle:AdminProject:listExport }
+    methods:  [GET]
+
+##################################################################### User
+
+feedbackfield_you:
+    pattern:  /you
+    defaults: { _controller: FeedbackFieldBundle:Index:you }
+    methods:  [GET]

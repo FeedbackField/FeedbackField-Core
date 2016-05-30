@@ -1,0 +1,29 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+        <li class="active">Field Definition: {{ feedbackFieldDefinition.title }}</li>
+    </ol>
+
+    <p>
+        Is Auto Fill:
+        {%  if feedbackFieldTypes[feedbackFieldDefinition.type].isAutoFillPossible %}
+            {%  if feedbackFieldDefinition.isAutoFill %}
+                Yes
+            {%  else %}
+                No
+            {% endif %}
+        {%  else %}
+            n/a
+        {%  endif %}
+    </p>
+
+{% endblock %}

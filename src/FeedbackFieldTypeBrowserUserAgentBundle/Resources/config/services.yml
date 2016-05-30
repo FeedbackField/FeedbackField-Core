@@ -1,0 +1,6 @@
+services:
+    feedback_field_type_browser_user_agent.type:
+        class: FeedbackFieldTypeBrowserUserAgentBundle\FeedbackFieldTypeBrowserUserAgentService
+        arguments: ["@service_container"]
+        tags:
+          -  { name: feedback_field_type.definition }

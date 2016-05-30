@@ -1,0 +1,29 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+        <li class="active">Feedback: {{ feedback.publicId }}</li>
+    </ol>
+
+    <table class="table table-striped">
+        <tbody>
+        {% for FeedbackFieldDefinition in FeedbackFieldDefinitions %}
+            <tr>
+                <td>{{ FeedbackFieldDefinition.field.title }}</td>
+                <td>
+                    {{  FeedbackFieldDefinition.valueString }}
+                </td>
+            </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

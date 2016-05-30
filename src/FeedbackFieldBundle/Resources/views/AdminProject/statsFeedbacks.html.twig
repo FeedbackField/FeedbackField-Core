@@ -1,0 +1,62 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+        <li class="active">Stats of Feedback</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                From <input type="text" name="from" value="{{  dateRange.from|date('c') }}">
+                To <input type="text" name="to" value="{{  dateRange.to|date('c') }}">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Count</th>
+                <th>{{ feedbackCount }}</th>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Public Id</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for feedbackFieldDefinition in feedbackFieldDefinitions %}
+            <tr>
+                <td>{{ feedbackFieldDefinition.publicId }}</td>
+                <td>{{ feedbackFieldDefinition.title }}</td>
+                <td>
+                    {{ feedbackFieldTypes[feedbackFieldDefinition.type].title }}
+                </td>
+                <td><a href="{{ path('feedbackfield_admin_project_feedback_field_stats', { 'projectId':project.publicId,'fieldDefinitionId':feedbackFieldDefinition.publicId }) }}?from={{  dateRange.from|date('c')|url_encode}}&to={{  dateRange.to|date('c')|url_encode }}" class="btn btn-default">View Stats</a></td>
+            </tr>
+        {%  endfor %}
+        </tbody>
+
+    </table>
+
+
+{% endblock %}

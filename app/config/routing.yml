@@ -1,0 +1,23 @@
+feedback_field_type_browser_user_agent:
+    resource: "@FeedbackFieldTypeBrowserUserAgentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+feedback_field_type_url:
+    resource: "@FeedbackFieldTypeURLBundle/Resources/config/routing.yml"
+    prefix:   /
+
+feedback_field_type_text:
+    resource: "@FeedbackFieldTypeTextBundle/Resources/config/routing.yml"
+    prefix:   /
+
+feedback_field_type_string:
+    resource: "@FeedbackFieldTypeStringBundle/Resources/config/routing.yml"
+    prefix:   /
+
+feedbackfield:
+    resource: "@FeedbackFieldBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    

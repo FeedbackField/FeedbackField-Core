@@ -1,0 +1,43 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+	<ol class="breadcrumb">
+		<li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+		<li class="active">Projects</li>
+	</ol>
+
+	{% if projects %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Active</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for project in projects %}
+				<tr>
+					<td>{{ project.title }}</td>
+					<td>{% if project.active %}Yes{% else %}No{% endif %}</td>
+					<td class="action-link"><a href="{{ path('feedbackfield_admin_project_show', {'projectId':project.publicId }) }}" class="btn btn-default">View</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>No projects</p>
+	{% endif %}
+
+	<ul class="list-group">
+		<li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_new', { }) }}" class="btn btn-warning">New project</a></li>
+	</ul>
+
+
+{% endblock %}

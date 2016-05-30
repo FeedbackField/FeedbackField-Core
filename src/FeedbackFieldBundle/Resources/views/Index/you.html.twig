@@ -1,0 +1,15 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+  <ul>
+    <li><a href="{{ path('fos_user_change_password') }}">Change Password</a></li>
+    <li><a href="{{ path('fos_user_profile_edit') }}">Change Details</a></li>
+  </ul>
+
+{% endblock %}

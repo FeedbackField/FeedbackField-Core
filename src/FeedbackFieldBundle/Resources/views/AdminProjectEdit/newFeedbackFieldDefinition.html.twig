@@ -1,0 +1,31 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('feedbackfield_admin_home') }}">Admin</a></li>
+        <li><a href="{{ path('feedbackfield_admin_project_show', {'projectId': project.publicId } ) }}">Project: {{ project.title }}</a></li>
+    </ol>
+
+
+
+    <section class="">
+
+        <form class="styled" action="" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Create New Feedback Field Definition" />
+
+        </form>
+
+    </section>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{#
+ #  @license 3-clause BSD
+ #  @link https://github.com/FeedbackField/FeedbackField-Core
+ #}
+
+{% extends 'FeedbackFieldBundle::base.html.twig' %}
+
+{% block main %}
+
+  <ol class="breadcrumb">
+    <li class="active">Admin</li>
+  </ol>
+
+  <ul class="list-group">
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_list', { }) }}" class="btn btn-default">Projects</a></li>
+    <li class="list-group-item"><a href="{{ path('feedbackfield_admin_project_new', { }) }}" class="btn btn-warning">New project</a></li>
+  </ul>
+
+{% endblock %}

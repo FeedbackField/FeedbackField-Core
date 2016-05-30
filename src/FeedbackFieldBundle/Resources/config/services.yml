@@ -1,0 +1,11 @@
+# @license 3-clause BSD
+# @link https://github.com/FeedbackField/FeedbackField-Core
+
+services:
+    my.listener:
+        class: FeedbackFieldBundle\EventListener\PrePersistEventListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+    feedback_field_type_finder:
+        class: FeedbackFieldBundle\FeedbackFieldTypeFinderService
+        arguments: ["@service_container"]
