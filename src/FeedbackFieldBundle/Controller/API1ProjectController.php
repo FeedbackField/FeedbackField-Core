@@ -50,35 +50,45 @@ class API1ProjectController extends Controller
 
         $feedback = new Feedback();
         $feedback->setProject($this->project);
-        $objectsToSave = array( );
+        $fieldsToSave = array( );
 
-        foreach($doctrine->getRepository('FeedbackFieldBundle:FeedbackFieldDefinition')->getForProject($this->project) as $field) {
-            if (isset($fieldTypes[$field->getType()])) {
-                $feedbackFieldValue = $fieldTypes[$field->getType()]->getNewValueEntity();
-                $feedbackFieldValue->setFeedbackFieldDefinition($field);
+        foreach($doctrine->getRepository('FeedbackFieldBundle:FeedbackFieldDefinition')->getForProject($this->project) as $fieldDefinition) {
+            if (isset($fieldTypes[$fieldDefinition->getType()])) {
+                $feedbackFieldValue = $fieldTypes[$fieldDefinition->getType()]->getNewValueEntity();
+                $feedbackFieldValue->setFeedbackFieldDefinition($fieldDefinition);
                 $feedbackFieldValue->setFeedback($feedback);
-                if ($field->getIsAutoFill()) {
+                if ($fieldDefinition->getIsAutoFill()) {
                     if ($feedbackFieldValue->setAutoFilledValueFromAPI1($request)) {
-                        $objectsToSave[] = $feedbackFieldValue;
+                        $fieldsToSave[$fieldDefinition->getPublicId()] = $feedbackFieldValue;
                     }
                 } else {
-                    $value = $request->get($field->getPublicId(), null);
+                    $value = $request->get($fieldDefinition->getPublicId(), null);
                     if ($feedbackFieldValue->setValueFromAPI1($value)) {
-                        $objectsToSave[] = $feedbackFieldValue;
+                        $fieldsToSave[$fieldDefinition->getPublicId()] = $feedbackFieldValue;
                     }
                 }
             }
         }
 
-        if (count($objectsToSave) > 0) {
+        if (count($fieldsToSave) > 0) {
+            # Save Actual Feedback to DataBase
             $doctrine->persist($feedback);
             $doctrine->flush($feedback);
-            foreach($objectsToSave as $objectToSave) {
-                $doctrine->persist($objectToSave);
+            # Save Any Fields to DataBase
+            foreach($fieldsToSave as $fieldToSave) {
+                $doctrine->persist($fieldToSave);
             }
-            $doctrine->flush($objectsToSave);
+            $doctrine->flush($fieldsToSave);
+            # Call any fields Post save
+            foreach($doctrine->getRepository('FeedbackFieldBundle:FeedbackFieldDefinition')->getForProject($this->project) as $fieldDefinition) {
+                if (isset($fieldTypes[$fieldDefinition->getType()]) && isset($fieldsToSave[$fieldDefinition->getPublicId()])) {
+                    if ($fieldTypes[$fieldDefinition->getType()]->callPostPersistForField($this->project, $fieldDefinition, $fieldsToSave[$fieldDefinition->getPublicId()])) {
+                        $doctrine->persist($fieldsToSave[$fieldDefinition->getPublicId()]);
+                        $doctrine->flush($fieldsToSave[$fieldDefinition->getPublicId()]);
+                    }
+                }
+            }
         }
-
 
         $response = new Response(json_encode(array()));
         $response->headers->set('Content-Type', 'application/json');

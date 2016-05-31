@@ -1,6 +1,7 @@
 <?php
 
 namespace FeedbackFieldBundle;
+use FeedbackFieldBundle\Entity\BaseFeedbackFieldValue;
 use FeedbackFieldBundle\Entity\Feedback;
 use FeedbackFieldBundle\Entity\FeedbackFieldDefinition;
 use FeedbackFieldBundle\Entity\Project;
@@ -27,5 +28,7 @@ interface FeedbackFieldTypeServiceInterface {
     public function getCountWithFieldValue(Project $project, DateRange $dateRange, FeedbackFieldDefinition $feedbackFieldDefinition);
 
     public function getFieldStatsLinks(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition);
+
+    public function callPostPersistForField(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition, BaseFeedbackFieldValue $feedbackFieldValue);
 
 }

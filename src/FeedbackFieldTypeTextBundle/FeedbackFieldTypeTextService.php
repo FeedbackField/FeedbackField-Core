@@ -3,6 +3,7 @@
 namespace FeedbackFieldTypeTextBundle;
 
 use FeedbackFieldBundle\DateRange;
+use FeedbackFieldBundle\Entity\BaseFeedbackFieldValue;
 use FeedbackFieldBundle\Entity\Feedback;
 use FeedbackFieldBundle\Entity\FeedbackFieldDefinition;
 use FeedbackFieldBundle\Entity\Project;
@@ -65,6 +66,11 @@ class FeedbackFieldTypeTextService implements FeedbackFieldTypeServiceInterface
     public function getFieldStatsLinks(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition)
     {
         return array();
+    }
+
+    public function callPostPersistForField(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition, BaseFeedbackFieldValue $feedbackFieldValue)
+    {
+        return false;
     }
 
 }

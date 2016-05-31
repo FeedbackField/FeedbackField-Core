@@ -4,6 +4,7 @@ namespace FeedbackFieldTypeBrowserUserAgentBundle;
 
 
 use FeedbackFieldBundle\DateRange;
+use FeedbackFieldBundle\Entity\BaseFeedbackFieldValue;
 use FeedbackFieldBundle\Entity\Feedback;
 use FeedbackFieldBundle\Entity\FeedbackFieldDefinition;
 use FeedbackFieldBundle\Entity\Project;
@@ -62,6 +63,28 @@ class FeedbackFieldTypeBrowserUserAgentService implements FeedbackFieldTypeServi
     public function getFieldStatsLinks(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition)
     {
         return array();
+    }
+
+    public function callPostPersistForField(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition, BaseFeedbackFieldValue $feedbackFieldValue)
+    {
+        if ($feedbackFieldValue->hasValue() && !$feedbackFieldValue->hasAnySubValues()) {
+            $data = $this->container->get('browscap')->getBrowsCap()->getBrowser($feedbackFieldValue->getValue());
+            $feedbackFieldValue->setValueDeviceType($data->Device_Type);
+            $feedbackFieldValue->setValueDevicePointingMethod($data->Device_Pointing_Method);
+            $feedbackFieldValue->setValueComment($data->Comment);
+            $feedbackFieldValue->setValueParent($data->Parent);
+            $feedbackFieldValue->setValueBrowser($data->Browser);
+            $feedbackFieldValue->setValueBrowserMaker($data->Browser_Maker);
+            $feedbackFieldValue->setValuePlatform($data->Platform);
+            $feedbackFieldValue->setValueVersion($data->Version);
+            $feedbackFieldValue->setValueVersionMajor($data->MajorVer);
+            $feedbackFieldValue->setValueVersionMinor($data->MinorVer);
+            $feedbackFieldValue->setValueIsMobile($data->isMobileDevice);
+            $feedbackFieldValue->setValueIsTablet($data->isTablet);
+            $feedbackFieldValue->setValueIsCrawler($data->Crawler);
+            return true;
+        }
+        return false;
     }
 
 }
