@@ -44,8 +44,6 @@ class AdminProjectFeedbackController extends Controller
     public function indexAction($projectId, $feedbackId)
     {
         $doctrine = $this->getDoctrine()->getManager();
-        $feedbackRepo = $doctrine->getRepository('FeedbackFieldBundle:Feedback');
-
 
         // build
         $this->build($projectId, $feedbackId);
@@ -58,7 +56,8 @@ class AdminProjectFeedbackController extends Controller
                 if ($fieldValue != null) {
                     $fields[] = array(
                         'field' => $fieldDefinition,
-                        'valueString' => $fieldValue->getValueAsString($doctrine)
+                        'valueString' => $fieldValue->getValueAsString($doctrine),
+                        'subValuesString' => $fieldValue->getSubValuesAsString($doctrine),
                     );
                 }
             }

@@ -65,5 +65,11 @@ class FeedbackFieldValueText extends BaseFeedbackFieldValue {
         return $this->value;
     }
 
+    public function getSubValuesAsString($doctrine)
+    {
+        return array();
+    }
+
+
 }
 

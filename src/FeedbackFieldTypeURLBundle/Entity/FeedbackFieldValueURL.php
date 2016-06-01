@@ -270,6 +270,20 @@ class FeedbackFieldValueURL extends BaseFeedbackFieldValue {
         return $this->value;
     }
 
+    public function getSubValuesAsString($doctrine)
+    {
+        return array(
+            'Scheme'=>$this->valueScheme,
+            'Host'=>$this->valueHost,
+            'Port'=>$this->valuePort,
+            'User'=>$this->valueUser,
+            'Pass'=>$this->valuePass,
+            'Path'=>$this->valuePath,
+            'Query'=>$this->valueQuery,
+            'Fragment'=>$this->valueFragment,
+        );
+    }
+
 
 }
 

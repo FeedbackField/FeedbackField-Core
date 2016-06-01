@@ -32,6 +32,8 @@ abstract class BaseFeedbackFieldValue {
 
     public  abstract function getValueAsString($doctrine);
 
+    public  abstract function getSubValuesAsString($doctrine);
+
     public abstract function setValueFromAPI1($value);
 
     public abstract function setAutoFilledValueFromAPI1(Request $request);

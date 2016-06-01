@@ -22,6 +22,12 @@
                     {{  FeedbackFieldDefinition.valueString }}
                 </td>
             </tr>
+            {%  for subValueKey, subValueValue in FeedbackFieldDefinition.subValuesString  %}
+                <tr>
+                    <td>({{  subValueKey  }})</td>
+                    <td>{{  subValueValue  }}</td>
+                </tr>
+            {%  endfor %}
         {%  endfor %}
         </tbody>
     </table>

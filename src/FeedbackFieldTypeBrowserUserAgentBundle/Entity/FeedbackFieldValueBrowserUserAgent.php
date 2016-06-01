@@ -378,5 +378,23 @@ class FeedbackFieldValueBrowserUserAgent extends BaseFeedbackFieldValue {
         return (boolean)$this->value;
     }
 
+    public function getSubValuesAsString($doctrine)
+    {
+        return array(
+            'BrowserMaker'=>$this->valueBrowserMaker,
+            'Browser'=>$this->valueBrowser,
+            'Version'=>$this->valueVersion,
+            'VersionMajor'=>$this->valueVersionMajor,
+            'VersionMinor'=>$this->valueVersionMinor,
+            'Platform'=>$this->valuePlatform,
+            'IsMobile'=>$this->valueIsMobile ? 'yes' : 'no',
+            'IsTablet'=>$this->valueIsTablet ? 'yes' : 'no',
+            'IsCrawler'=>$this->valueIsCrawler ? 'yes' : 'no',
+            'DeviceType'=>$this->valueDeviceType,
+            'DevicePointingMethod'=>$this->valueDevicePointingMethod,
+            'Comment'=>$this->valueComment,
+            'Parent'=>$this->valueParent,
+        );
+    }
 }
 
