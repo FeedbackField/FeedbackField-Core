@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new FeedbackFieldTypeStringBundle\FeedbackFieldTypeStringBundle(),
             new FeedbackFieldTypeTextBundle\FeedbackFieldTypeTextBundle(),
+            new FeedbackFieldTypeEmailBundle\FeedbackFieldTypeEmailBundle(),
             new FeedbackFieldTypeURLBundle\FeedbackFieldTypeURLBundle(),
             new FeedbackFieldTypeBrowserUserAgentBundle\FeedbackFieldTypeBrowserUserAgentBundle(),
         );

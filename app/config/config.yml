@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: "@FeedbackFieldTypeStringBundle/Resources/config/services.yml" }
     - { resource: "@FeedbackFieldTypeTextBundle/Resources/config/services.yml" }
+    - { resource: "@FeedbackFieldTypeEmailBundle/Resources/config/services.yml" }
     - { resource: "@FeedbackFieldTypeURLBundle/Resources/config/services.yml" }
     - { resource: "@FeedbackFieldTypeBrowserUserAgentBundle/Resources/config/services.yml" }
 

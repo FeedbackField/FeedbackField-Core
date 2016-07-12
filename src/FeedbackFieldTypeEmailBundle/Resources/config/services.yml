@@ -1,0 +1,6 @@
+services:
+    feedback_field_type_email.type:
+        class: FeedbackFieldTypeEmailBundle\FeedbackFieldTypeEmailService
+        arguments: ["@service_container"]
+        tags:
+          -  { name: feedback_field_type.definition }

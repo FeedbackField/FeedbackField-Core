@@ -14,6 +14,10 @@ feedback_field_type_string:
     resource: "@FeedbackFieldTypeStringBundle/Resources/config/routing.yml"
     prefix:   /
 
+feedback_field_type_email:
+    resource: "@FeedbackFieldTypeEmailBundle/Resources/config/routing.yml"
+    prefix:   /
+
 feedbackfield:
     resource: "@FeedbackFieldBundle/Resources/config/routing.yml"
     prefix:   /
