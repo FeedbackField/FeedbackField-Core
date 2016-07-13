@@ -11,7 +11,7 @@ feedbackfield_home:
 feedbackfield_api1_project_submit:
     pattern:  /api1/project/{projectId}/submit
     defaults: { _controller: FeedbackFieldBundle:API1Project:index }
-    methods:  [GET]
+    methods:  [GET,POST]
 
 
 ##################################################################### Admin
