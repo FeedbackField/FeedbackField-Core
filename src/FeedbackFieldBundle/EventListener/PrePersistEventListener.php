@@ -16,8 +16,7 @@ class PrePersistEventListener  {
 
 
 
-    const MIN_LENGTH = 10;
-    const MIN_LENGTH_BIG = 100;
+    const MIN_LENGTH = 5;
     const MAX_LENGTH = 250;
     const LENGTH_STEP = 1;
 
@@ -27,7 +26,7 @@ class PrePersistEventListener  {
         if ($entity instanceof Feedback) {
             if (!$entity->getPublicId()) {
                 $manager = $args->getEntityManager()->getRepository('FeedbackFieldBundle:Feedback');
-                $idLen = self::MIN_LENGTH_BIG;
+                $idLen = self::MIN_LENGTH;
                 $id = \FeedbackFieldBundle\FeedbackFieldBundle::createKey(1, $idLen);
                 while ($manager->doesPublicIdExist($id, $entity->getProject())) {
                     if ($idLen < self::MAX_LENGTH) {
