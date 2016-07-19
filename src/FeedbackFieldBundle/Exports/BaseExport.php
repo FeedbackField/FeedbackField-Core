@@ -114,22 +114,22 @@ abstract class BaseExport
             $log = new ExportLog();
             $log->setExport($this->export);
             $log->setFeedback($feedback);
-            $this->container->get('doctrine')->persist($log);
-            $this->container->get('doctrine')->flush();
+            $this->container->get('doctrine')->getManager()->persist($log);
+            $this->container->get('doctrine')->getManager()->flush();
         }
         return $log;
     }
 
     protected function logRejected(ExportLog $exportLog) {
         $exportLog->setRejectedAt(new \DateTime("", new \DateTimeZone("UTC")));
-        $this->container->get('doctrine')->persist($exportLog);
-        $this->container->get('doctrine')->flush();
+        $this->container->get('doctrine')->getManager()->persist($exportLog);
+        $this->container->get('doctrine')->getManager()->flush();
     }
 
     protected function logDone(ExportLog $exportLog) {
         $exportLog->setDoneAt(new \DateTime("", new \DateTimeZone("UTC")));
-        $this->container->get('doctrine')->persist($exportLog);
-        $this->container->get('doctrine')->flush();
+        $this->container->get('doctrine')->getManager()->persist($exportLog);
+        $this->container->get('doctrine')->getManager()->flush();
     }
 
 }
