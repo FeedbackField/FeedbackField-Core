@@ -72,6 +72,8 @@ abstract class BaseExport
 
         }
 
+        $out .= "Id: ".$feedback->getPublicId();
+
         return $out;
 
     }
