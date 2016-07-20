@@ -39,7 +39,34 @@ class API1ProjectController extends Controller
         }
     }
 
-    public function indexAction($projectId, Request $request)
+    public function submitAction($projectId, Request $request)
+    {
+        return $this->submitJSONAction($projectId, $request);
+    }
+
+    public function submitJSONAction($projectId, Request $request) {
+
+        $out = $this->submit($projectId, $request);
+
+        $response = new Response(json_encode(array()));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
+    }
+
+    public function submitJSONPAction($projectId, Request $request) {
+
+        $out = $this->submit($projectId, $request);
+
+        $callbackFunc = $request->get('callback', 'callback');
+
+        $response = new Response($callbackFunc."(".json_encode(array()).")");
+        $response->headers->set('Content-Type', 'text/javascript');
+        return $response;
+
+    }
+
+    protected function submit($projectId, Request $request)
     {
         $doctrine = $this->getDoctrine()->getManager();
 

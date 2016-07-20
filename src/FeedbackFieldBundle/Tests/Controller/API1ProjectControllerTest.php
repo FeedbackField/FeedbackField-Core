@@ -219,5 +219,201 @@ class API1ProjectControllerTest extends BaseTestWithDataBase
     }
 
 
+    function testSaveDefaultEndPoint() {
+
+        $user = new User();
+        $user->setUsername('test');
+        $user->setEmail('test@example.org');
+        $user->setPassword('oeuoeu');
+        $this->em->persist($user);
+
+        $project = new Project();
+        $project->setTitle('TEST');
+        $project->setPublicId('test');
+        $project->setActive(true);
+        $project->setOwner($user);
+        $this->em->persist($project);
+
+        $feedbackFieldDefinition = new FeedbackFieldDefinition();
+        $feedbackFieldDefinition->setProject($project);
+        $feedbackFieldDefinition->setTitle('Comment');
+        $feedbackFieldDefinition->setPublicId('comment');
+        $feedbackFieldDefinition->setType('text');
+        $feedbackFieldDefinition->setSort(10);
+        $feedbackFieldDefinition->setAddedBy($user);
+        $this->em->persist($feedbackFieldDefinition);
+
+        $this->em->flush();
+
+        // CALL API TO STORE A FEEDBACK
+        $client = static::createClient();
+        $crawler = $client->request('GET','/api1/project/test/submit?comment=cats are great');
+        $response = $client->getResponse()->getContent();
+
+        // CHECK RESPONSE
+        $this->assertEquals('[]', $response);
+
+        // CHECK FEEDBACK SAVED
+        $feedbackRepo = $this->em->getRepository('FeedbackFieldBundle:Feedback');
+
+        $feedback = $feedbackRepo->findOneByProject($project);
+
+        $this->assertNotNull($feedback);
+
+        $fieldValue = $this->container->get('feedback_field_type_finder')->getFieldTypeById('text')->getFieldValue($feedback, $feedbackFieldDefinition);
+
+        $this->assertNotNull($fieldValue);
+
+        $this->assertEquals('cats are great', $fieldValue->getValueAsString($this->em));
+
+    }
+
+    function testSaveJSONEndPoint() {
+
+        $user = new User();
+        $user->setUsername('test');
+        $user->setEmail('test@example.org');
+        $user->setPassword('oeuoeu');
+        $this->em->persist($user);
+
+        $project = new Project();
+        $project->setTitle('TEST');
+        $project->setPublicId('test');
+        $project->setActive(true);
+        $project->setOwner($user);
+        $this->em->persist($project);
+
+        $feedbackFieldDefinition = new FeedbackFieldDefinition();
+        $feedbackFieldDefinition->setProject($project);
+        $feedbackFieldDefinition->setTitle('Comment');
+        $feedbackFieldDefinition->setPublicId('comment');
+        $feedbackFieldDefinition->setType('text');
+        $feedbackFieldDefinition->setSort(10);
+        $feedbackFieldDefinition->setAddedBy($user);
+        $this->em->persist($feedbackFieldDefinition);
+
+        $this->em->flush();
+
+        // CALL API TO STORE A FEEDBACK
+        $client = static::createClient();
+        $crawler = $client->request('GET','/api1/project/test/submit.json?comment=cats are great');
+        $response = $client->getResponse()->getContent();
+
+        // CHECK RESPONSE
+        $this->assertEquals('[]', $response);
+
+        // CHECK FEEDBACK SAVED
+        $feedbackRepo = $this->em->getRepository('FeedbackFieldBundle:Feedback');
+
+        $feedback = $feedbackRepo->findOneByProject($project);
+
+        $this->assertNotNull($feedback);
+
+        $fieldValue = $this->container->get('feedback_field_type_finder')->getFieldTypeById('text')->getFieldValue($feedback, $feedbackFieldDefinition);
+
+        $this->assertNotNull($fieldValue);
+
+        $this->assertEquals('cats are great', $fieldValue->getValueAsString($this->em));
+
+    }
+
+    function testSaveJSONPEndPointDefaultCallback() {
+
+        $user = new User();
+        $user->setUsername('test');
+        $user->setEmail('test@example.org');
+        $user->setPassword('oeuoeu');
+        $this->em->persist($user);
+
+        $project = new Project();
+        $project->setTitle('TEST');
+        $project->setPublicId('test');
+        $project->setActive(true);
+        $project->setOwner($user);
+        $this->em->persist($project);
+
+        $feedbackFieldDefinition = new FeedbackFieldDefinition();
+        $feedbackFieldDefinition->setProject($project);
+        $feedbackFieldDefinition->setTitle('Comment');
+        $feedbackFieldDefinition->setPublicId('comment');
+        $feedbackFieldDefinition->setType('text');
+        $feedbackFieldDefinition->setSort(10);
+        $feedbackFieldDefinition->setAddedBy($user);
+        $this->em->persist($feedbackFieldDefinition);
+
+        $this->em->flush();
+
+        // CALL API TO STORE A FEEDBACK
+        $client = static::createClient();
+        $crawler = $client->request('GET','/api1/project/test/submit.jsonp?comment=cats are great');
+        $response = $client->getResponse()->getContent();
+
+        // CHECK RESPONSE
+        $this->assertEquals('callback([])', $response);
+
+        // CHECK FEEDBACK SAVED
+        $feedbackRepo = $this->em->getRepository('FeedbackFieldBundle:Feedback');
+
+        $feedback = $feedbackRepo->findOneByProject($project);
+
+        $this->assertNotNull($feedback);
+
+        $fieldValue = $this->container->get('feedback_field_type_finder')->getFieldTypeById('text')->getFieldValue($feedback, $feedbackFieldDefinition);
+
+        $this->assertNotNull($fieldValue);
+
+        $this->assertEquals('cats are great', $fieldValue->getValueAsString($this->em));
+
+    }
+
+    function testSaveJSONPEndPointSetCallback() {
+
+        $user = new User();
+        $user->setUsername('test');
+        $user->setEmail('test@example.org');
+        $user->setPassword('oeuoeu');
+        $this->em->persist($user);
+
+        $project = new Project();
+        $project->setTitle('TEST');
+        $project->setPublicId('test');
+        $project->setActive(true);
+        $project->setOwner($user);
+        $this->em->persist($project);
+
+        $feedbackFieldDefinition = new FeedbackFieldDefinition();
+        $feedbackFieldDefinition->setProject($project);
+        $feedbackFieldDefinition->setTitle('Comment');
+        $feedbackFieldDefinition->setPublicId('comment');
+        $feedbackFieldDefinition->setType('text');
+        $feedbackFieldDefinition->setSort(10);
+        $feedbackFieldDefinition->setAddedBy($user);
+        $this->em->persist($feedbackFieldDefinition);
+
+        $this->em->flush();
+
+        // CALL API TO STORE A FEEDBACK
+        $client = static::createClient();
+        $crawler = $client->request('GET','/api1/project/test/submit.jsonp?callback=cats&comment=cats are great');
+        $response = $client->getResponse()->getContent();
+
+        // CHECK RESPONSE
+        $this->assertEquals('cats([])', $response);
+
+        // CHECK FEEDBACK SAVED
+        $feedbackRepo = $this->em->getRepository('FeedbackFieldBundle:Feedback');
+
+        $feedback = $feedbackRepo->findOneByProject($project);
+
+        $this->assertNotNull($feedback);
+
+        $fieldValue = $this->container->get('feedback_field_type_finder')->getFieldTypeById('text')->getFieldValue($feedback, $feedbackFieldDefinition);
+
+        $this->assertNotNull($fieldValue);
+
+        $this->assertEquals('cats are great', $fieldValue->getValueAsString($this->em));
+
+    }
+
 }
 

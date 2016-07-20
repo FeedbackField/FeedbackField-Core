@@ -10,7 +10,17 @@ feedbackfield_home:
 
 feedbackfield_api1_project_submit:
     pattern:  /api1/project/{projectId}/submit
-    defaults: { _controller: FeedbackFieldBundle:API1Project:index }
+    defaults: { _controller: FeedbackFieldBundle:API1Project:submit }
+    methods:  [GET,POST]
+
+feedbackfield_api1_project_submit_json:
+    pattern:  /api1/project/{projectId}/submit.json
+    defaults: { _controller: FeedbackFieldBundle:API1Project:submitJSON }
+    methods:  [GET,POST]
+
+feedbackfield_api1_project_submit_jsonp:
+    pattern:  /api1/project/{projectId}/submit.jsonp
+    defaults: { _controller: FeedbackFieldBundle:API1Project:submitJSONP }
     methods:  [GET,POST]
 
 
