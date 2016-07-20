@@ -58,7 +58,11 @@ class ProcessCommand extends ContainerAwareCommand
 
                 $output->writeln('- - Export ID '. $export->getPublicId());
 
-                if ($export->isTypeTrello()) {
+                if (!$export->getIsActive()) {
+
+                    $output->writeln('- - - Is not active');
+
+                } else if ($export->isTypeTrello()) {
 
                     $exportFeedbackToTrello = new ExportFeedbackToTrello($export, $this->getContainer());
                     $exportFeedbackToTrello->go($feedback);

@@ -13,6 +13,7 @@
         <li class="active">Export: {{ export.publicId }}</li>
     </ol>
 
+    <p>Active: {%  if export.isActive %}Yes{% else %}No{%  endif %}</p>
 
     {%  if  onlyIfFeedbackFields %}
         <p>Only Export if Fields ...</p>

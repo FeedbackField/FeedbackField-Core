@@ -51,6 +51,18 @@ class Export
      */
     private $type;
 
+
+
+    /**
+     * @var integer
+     *
+     *  (should be nullable false, but old datat is around. Doesn't make much difference)
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     */
+    private $isActive = false;
+
+
     /**
      * @return int
      */
@@ -136,6 +148,24 @@ class Export
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * @return int
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param int $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+
 
     /**
      * @ORM\PrePersist()
