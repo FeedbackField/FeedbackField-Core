@@ -62,7 +62,13 @@ class FeedbackFieldTypeStringService implements FeedbackFieldTypeServiceInterfac
 
     public function getFieldStatsLinks(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition)
     {
-        return array();
+        return array(
+            array(
+                'label' => 'ENUM Data',
+                'url' => $this->container->get('router')->generate('feedbackfield_admin_project_feedback_field_string_enum',
+                    array('projectId'=>$project->getPublicId(),'fieldDefinitionId'=>$feedbackFieldDefinition->getPublicId())),
+            ),
+        );
     }
 
     public function callPostPersistForField(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition, BaseFeedbackFieldValue $feedbackFieldValue)

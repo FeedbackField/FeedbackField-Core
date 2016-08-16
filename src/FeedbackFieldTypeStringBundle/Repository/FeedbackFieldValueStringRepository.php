@@ -33,5 +33,27 @@ class FeedbackFieldValueStringRepository extends EntityRepository
         return $result[0]['c'];
     }
 
+
+    public function getEnum(Project $project, DateRange $dateRange, FeedbackFieldDefinition $feedbackFieldDefinition) {
+        $results = $this->getEntityManager()
+            ->createQuery(
+                ' SELECT fv.value, count(f) AS c FROM FeedbackFieldTypeStringBundle:FeedbackFieldValueString fv'.
+                ' JOIN fv.feedback f ' .
+                ' WHERE f.project = :project AND f.createdAt >= :from AND f.createdAt <= :to AND fv.feedbackFieldDefinition = :fieldDef '.
+                ' GROUP BY fv.value '
+            )
+            ->setParameter('project', $project)
+            ->setParameter('from', $dateRange->getFrom())
+            ->setParameter('to', $dateRange->getTo())
+            ->setParameter('fieldDef', $feedbackFieldDefinition)
+            ->getResult();
+        $out = array();
+        foreach($results as $result) {
+            $out[$result['value']] = array('total'=>$result['c']);
+        }
+        return $out;
+    }
+
+
 }
 

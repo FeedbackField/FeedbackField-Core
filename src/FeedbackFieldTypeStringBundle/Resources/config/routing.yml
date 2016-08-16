@@ -1,0 +1,6 @@
+
+
+feedbackfield_admin_project_feedback_field_string_enum:
+    pattern:  /admin/project/{projectId}/feedbackstats/field/{fieldDefinitionId}/string/enum
+    defaults: { _controller: FeedbackFieldTypeStringBundle:AdminProjectStatsFeedbackFieldString:enum }
+    methods:  [GET]
