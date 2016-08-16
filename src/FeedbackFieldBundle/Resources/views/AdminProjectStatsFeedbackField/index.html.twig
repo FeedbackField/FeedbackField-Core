@@ -14,15 +14,7 @@
         <li class="active">For Field: {{  feedbackFieldDefinition.title }}</li>
     </ol>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form>
-                From <input type="text" name="from" value="{{  dateRange.from|date('c') }}">
-                To <input type="text" name="to" value="{{  dateRange.to|date('c') }}">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-    </div>
+    {%  include 'FeedbackFieldBundle::AdminProjectStatsFeedbackField/Common/statsFilters.html.twig' %}
 
     <table class="table table-striped">
         <tbody>
