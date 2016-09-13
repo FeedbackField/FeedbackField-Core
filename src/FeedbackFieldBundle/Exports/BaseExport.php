@@ -80,9 +80,6 @@ abstract class BaseExport
 
     protected function shouldExportThisFeedback(Feedback $feedback) {
 
-        $export = true;
-
-
         foreach($this->container->get('doctrine')->getRepository('FeedbackFieldBundle:ExportOnlyIfFeedbackField')->findBy(array('export'=>$this->export)) as $exportOnlyIfFeedbackField) {
 
             $fieldType = $this->container->get('feedback_field_type_finder')->getFieldTypeById($exportOnlyIfFeedbackField->getFeedbackFieldDefinition()->getType());
@@ -91,14 +88,14 @@ abstract class BaseExport
 
                 $value = $fieldType->getFieldValue($feedback, $exportOnlyIfFeedbackField->getFeedbackFieldDefinition());
                 if (is_null($value)) {
-                    $export = false;
+                    return false;
                 }
 
             }
 
         }
 
-        return $export;
+        return true;
 
     }
 
