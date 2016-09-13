@@ -71,6 +71,13 @@ class FeedbackFieldDefinition
      */
     private $addedAt;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anonymise_after_days", type="integer", nullable=false, options={"default" = 0})
+     */
+    private $anonymiseAfterDays = 0;
+
 
     /**
      * @var integer
@@ -207,6 +214,23 @@ class FeedbackFieldDefinition
     {
         $this->addedAt = $addedAt;
     }
+
+    /**
+     * @return int
+     */
+    public function getAnonymiseAfterDays()
+    {
+        return $this->anonymiseAfterDays;
+    }
+
+    /**
+     * @param int $anonymiseAfterDays
+     */
+    public function setAnonymiseAfterDays($anonymiseAfterDays)
+    {
+        $this->anonymiseAfterDays = $anonymiseAfterDays;
+    }
+
 
     /**
      * @return int

@@ -33,5 +33,21 @@ class FeedbackFieldValueTextRepository extends EntityRepository
         return $result[0]['c'];
     }
 
+    public function getFieldsToAnonymise(FeedbackFieldDefinition $feedbackFieldDefinition)
+    {
+        $before = new \DateTime();
+        $before->sub(new \DateInterval('P' . $feedbackFieldDefinition->getAnonymiseAfterDays() . 'D'));
+        return $this->getEntityManager()
+            ->createQuery(
+                ' SELECT fv FROM FeedbackFieldTypeTextBundle:FeedbackFieldValueText fv' .
+                ' JOIN fv.feedback f ' .
+                ' WHERE f.createdAt < :before AND fv.isAnonymised = 0 AND fv.feedbackFieldDefinition = :fieldDef ' .
+                ' ORDER BY f.createdAt ASC '
+            )
+            ->setParameter('before', $before)
+            ->setParameter('fieldDef', $feedbackFieldDefinition)
+            ->getResult();
+    }
+
 }
 

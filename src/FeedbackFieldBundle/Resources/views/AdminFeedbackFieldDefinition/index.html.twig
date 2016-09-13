@@ -26,4 +26,9 @@
         {%  endif %}
     </p>
 
+    <p>
+        Anon:
+        {%  if feedbackFieldDefinition.anonymiseAfterDays  == 0 %}No{%  else %}{{  feedbackFieldDefinition.anonymiseAfterDays }} Days{%  endif %}
+    </p>
+
 {% endblock %}

@@ -29,6 +29,13 @@ abstract class BaseFeedbackFieldValue {
      */
     protected $feedbackFieldDefinition;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="is_anonymised", type="boolean", nullable=false, options={"default" = false })
+     */
+    protected $isAnonymised = false;
+
 
     public  abstract function getValueAsString($doctrine);
 
@@ -37,6 +44,23 @@ abstract class BaseFeedbackFieldValue {
     public abstract function setValueFromAPI1($value);
 
     public abstract function setAutoFilledValueFromAPI1(Request $request);
+
+    /**
+     * @return int
+     */
+    public function getIsAnonymised()
+    {
+        return $this->isAnonymised;
+    }
+
+    /**
+     * @param int $isAnonymised
+     */
+    public function setIsAnonymised($isAnonymised)
+    {
+        $this->isAnonymised = $isAnonymised;
+    }
+
 
 
     /**

@@ -20,6 +20,7 @@
                 <th>Title</th>
                 <th>Type</th>
                 <th>Auto Fill</th>
+                <th>Anon</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -41,6 +42,9 @@
                         {%  else %}
                             n/a
                         {%  endif %}
+                    </td>
+                    <td>
+                        {%  if feedbackFieldDefinition.anonymiseAfterDays  == 0 %}No{%  else %}{{  feedbackFieldDefinition.anonymiseAfterDays }} Days{%  endif %}
                     </td>
                     <td><a href="{{ path('feedbackfield_admin_project_feedback_field_definition_show', { 'projectId':project.publicId,'fieldDefinitionId':feedbackFieldDefinition.publicId }) }}" class="btn btn-default">View</a></td>
                 </tr>

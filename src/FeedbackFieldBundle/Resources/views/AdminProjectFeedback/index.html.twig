@@ -19,7 +19,11 @@
             <tr>
                 <td>{{ FeedbackFieldDefinition.field.title }}</td>
                 <td>
-                    {{  FeedbackFieldDefinition.valueString }}
+                    {%  if FeedbackFieldDefinition.value.isAnonymised  %}
+                        <div class="dataAnonymised">Anonymised!</div>
+                    {%  else %}
+                       {{  FeedbackFieldDefinition.valueString }}
+                    {%  endif %}
                 </td>
             </tr>
             {%  for subValueKey, subValueValue in FeedbackFieldDefinition.subValuesString  %}

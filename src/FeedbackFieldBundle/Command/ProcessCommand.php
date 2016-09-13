@@ -3,6 +3,7 @@
 namespace FeedbackFieldBundle\Command;
 
 
+use FeedbackFieldBundle\AnonymiseFeedback;
 use FeedbackFieldBundle\Entity\Project;
 use FeedbackFieldBundle\Exports\ExportFeedbackToTrello;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -44,9 +45,9 @@ class ProcessCommand extends ContainerAwareCommand
 
 
         $doctrine = $this->getContainer()->get('doctrine')->getManager();
+
+        // ############### Feedbacks
         $feedbackRepo = $doctrine->getRepository('FeedbackFieldBundle:Feedback');
-
-
         $feedbacks = $feedbackRepo->findBy(array('project'=>$project));
 
         foreach($feedbacks as $feedback) {
@@ -72,6 +73,24 @@ class ProcessCommand extends ContainerAwareCommand
 
             }
 
+
+        }
+
+        unset($feedbacks);
+
+        // ############### Anon
+
+        $feedbackFieldDefRepo = $doctrine->getRepository('FeedbackFieldBundle:FeedbackFieldDefinition');
+
+        foreach($feedbackFieldDefRepo->getForProject($project) as $fieldDefinition) {
+
+            if ($fieldDefinition->getAnonymiseAfterDays() > 0) {
+
+                $output->writeln('- Anon Field ID '. $fieldDefinition->getPublicId());
+
+                $fieldType = $this->getContainer()->get('feedback_field_type_finder')->getFieldTypeById($fieldDefinition->getType());
+                $fieldType->anonymiseFieldContents($project, $fieldDefinition);
+            }
 
         }
 

@@ -70,4 +70,8 @@ class FeedbackFieldTypeEmailService implements FeedbackFieldTypeServiceInterface
         return false;
     }
 
+    public function anonymiseFieldContents(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition)
+    {
+        // TODO: Implement anonymiseFieldContents() method.
+    }
 }

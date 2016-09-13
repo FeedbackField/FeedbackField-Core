@@ -56,6 +56,7 @@ class AdminProjectFeedbackController extends Controller
                 if ($fieldValue != null) {
                     $fields[] = array(
                         'field' => $fieldDefinition,
+                        'value' => $fieldValue,
                         'valueString' => $fieldValue->getValueAsString($doctrine),
                         'subValuesString' => $fieldValue->getSubValuesAsString($doctrine),
                     );

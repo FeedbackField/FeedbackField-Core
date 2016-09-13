@@ -31,4 +31,6 @@ interface FeedbackFieldTypeServiceInterface {
 
     public function callPostPersistForField(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition, BaseFeedbackFieldValue $feedbackFieldValue);
 
+    public function anonymiseFieldContents(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition);
+
 }

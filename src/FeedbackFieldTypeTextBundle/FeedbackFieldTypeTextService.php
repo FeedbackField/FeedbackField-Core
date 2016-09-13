@@ -73,4 +73,23 @@ class FeedbackFieldTypeTextService implements FeedbackFieldTypeServiceInterface
         return false;
     }
 
+    public function anonymiseFieldContents(Project $project, FeedbackFieldDefinition $feedbackFieldDefinition)
+    {
+        if ($feedbackFieldDefinition->getAnonymiseAfterDays() > 0) {
+
+            $em = $this->container->get('doctrine')->getEntityManager();
+
+            $fields = $em->
+                getRepository('FeedbackFieldTypeTextBundle:FeedbackFieldValueText')->
+                getFieldsToAnonymise($feedbackFieldDefinition);
+
+            foreach($fields as $field) {
+                $field->setValue(null);
+                $field->setIsAnonymised(true);
+                $em->persist($field);
+                $em->flush($field);
+            }
+
+        }
+    }
 }
