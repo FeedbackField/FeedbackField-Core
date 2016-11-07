@@ -65,8 +65,13 @@ class ProcessCommand extends ContainerAwareCommand
 
                 } else if ($export->isTypeTrello()) {
 
+                    $output->writeln('- - - Trello');
                     $exportFeedbackToTrello = new ExportFeedbackToTrello($export, $this->getContainer());
-                    $exportFeedbackToTrello->go($feedback);
+                    if ($exportFeedbackToTrello->go($feedback)) {
+                        $output->writeln('- - - - Done!');
+                    } else {
+                        $output->writeln('- - - - Not Done');
+                    }
 
                 }
 

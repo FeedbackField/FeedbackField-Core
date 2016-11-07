@@ -40,8 +40,9 @@ abstract class BaseExport
         $exportLog = $this->getLog($feedback);
 
         if (!$this->isLogMarkedDone($exportLog) && $this->shouldExportThisFeedback($feedback)) {
-            $this->process($feedback, $exportLog);
+            return $this->process($feedback, $exportLog);
         }
+        return false;
     }
 
     protected abstract function process(Feedback $feedback, ExportLog $exportLog);

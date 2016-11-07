@@ -60,11 +60,15 @@ class ExportFeedbackToTrello extends BaseExport
             if($response->getStatusCode() == 200) {
                 $this->logDone($exportLog);
                 return true;
+            } else {
+                $this->logRejected($exportLog);
+                return false;
             }
 
         } catch (RequestException $e) {
             var_dump($e->getMessage());
             $this->logRejected($exportLog);
+            return false;
         }
 
 
