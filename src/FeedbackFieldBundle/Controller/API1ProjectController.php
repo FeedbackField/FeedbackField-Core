@@ -48,7 +48,7 @@ class API1ProjectController extends Controller
 
         $out = $this->submit($projectId, $request);
 
-        $response = new Response(json_encode(array()));
+        $response = new Response(json_encode($out));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
 
@@ -60,7 +60,7 @@ class API1ProjectController extends Controller
 
         $callbackFunc = $request->get('callback', 'callback');
 
-        $response = new Response($callbackFunc."(".json_encode(array()).")");
+        $response = new Response($callbackFunc."(".json_encode($out).")");
         $response->headers->set('Content-Type', 'text/javascript');
         return $response;
 
@@ -117,9 +117,15 @@ class API1ProjectController extends Controller
             }
         }
 
-        $response = new Response(json_encode(array()));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+        $out = array();
+
+        // For Debug you may want to use these?
+        //$out['memory_get_peak_usage_false'] = memory_get_peak_usage(false);
+        //$out['memory_get_peak_usage_true'] = memory_get_peak_usage(true);
+        //$out['memory_get_usage_false'] = memory_get_usage(false);
+        //$out['memory_get_usage_true'] = memory_get_usage(true);
+
+        return $out;
 
     }
 
