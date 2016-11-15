@@ -5,7 +5,7 @@
             To <input type="text" name="to" value="{{  dateRange.to|date('c') }}">
 
             <ul>
-                {% for data in statsFiltersDates() %}
+                {% for data in FiltersDatesMonthly() %}
                     <a href="#" onclick="$(this).parents('form').find('input[name=from]').val('{{  data.from | date('c') }}'); $(this).parents('form').find('input[name=to]').val('{{  data.to | date('c') }}'); return false">{{  data.label }}</a>
                 {%  endfor %}
             </ul>

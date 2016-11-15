@@ -9,8 +9,8 @@ services:
     feedback_field_type_finder:
         class: FeedbackFieldBundle\FeedbackFieldTypeFinderService
         arguments: ["@service_container"]
-    twig.StatsFiltersDatesExtension:
-        class: FeedbackFieldBundle\Twig\StatsFiltersDatesExtension
+    twig.FiltersDatesExtension:
+        class: FeedbackFieldBundle\Twig\FiltersDatesExtension
         public: false
         tags:
             - { name: twig.extension }

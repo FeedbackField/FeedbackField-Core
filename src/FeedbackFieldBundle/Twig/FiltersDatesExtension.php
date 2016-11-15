@@ -3,16 +3,16 @@
 
 namespace FeedbackFieldBundle\Twig;
 
-class StatsFiltersDatesExtension extends \Twig_Extension
+class FiltersDatesExtension extends \Twig_Extension
 {
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('statsFiltersDates', array($this, 'statsFiltersDates')),
+            new \Twig_SimpleFunction('FiltersDatesMonthly', array($this, 'filtersDatesMonthly')),
         );
     }
 
-    public function statsFiltersDates()
+    public function filtersDatesMonthly()
     {
 
         $out = array();
@@ -46,7 +46,7 @@ class StatsFiltersDatesExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'StatsFiltersDatesExtension';
+        return 'FiltersDatesExtension';
     }
 }
 
