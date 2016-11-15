@@ -22,7 +22,7 @@
                     {%  if FeedbackFieldDefinition.value.isAnonymised  %}
                         <div class="dataAnonymised">Anonymised!</div>
                     {%  else %}
-                       {{  FeedbackFieldDefinition.valueString }}
+                       {{  FeedbackFieldDefinition.valueString | linkify | nl2br }}
                     {%  endif %}
                 </td>
             </tr>
