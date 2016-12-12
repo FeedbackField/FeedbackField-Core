@@ -76,3 +76,16 @@ If you have any exports defined, this command will process any new feedback item
 If you use the Browser User Agent field type, we try to extract extra info from the User Agent string. To do this, we need up to date browsecap data. This command updates and caches that data.
 
 If you don't run this command regularly but use this field type, the software will try to download the data when a piece of feedback is received. This will take a lot of time and memory use!
+
+
+## How to give admin access to a user
+
+Get the user to register in the browser at /register
+
+In the command line, run
+
+    php app/console fos:user:promote
+
+Enter the new users name and for a role enter: ROLE_ADMIN
+
+The user will have to log out and in again to see the difference.
