@@ -32,32 +32,32 @@ Each Field Type is a separate bundle.
 
 This lets you add your own field types by adding a bundle.
 
+Some field types can be set to Auto Fill. In this case, data will try to be filled in automatically.
+
 ## Field Type: Browser User Agent
 
-TODO
-
+This should be used with Auto Fill. The user agent string of the browser making the request is logged. It is also broken down into more details.
 ## Field Type: Email
 
-TODO
+Stores an email address.
 
 ## Field Type: String
 
-TODO
+Stores a string (Single line);
 
 ## Field Type: Text
 
-TODO
+Stores a string (Mulit Line);
 
 ## Field Type: URL
 
-TODO
-
+Stores a URL.  It is also broken down into more details.
 
 ## Installing
 
 Usual installation for a Symfony app.
 
-Make sure you run ````php app/console FeedbackField:updateBrowseCap```` during installation and before use. This updates information on browsers needed by the Browser User Agent field type.
+Make sure you run ````php app/console FeedbackField:updateBrowseCap```` during installation. This updates information on browsers needed by the Browser User Agent field type.
 
 ## Cron jobs
 
